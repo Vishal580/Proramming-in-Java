@@ -1,0 +1,32 @@
+<project name="PROJECTNAME" default="main" basedir=".">
+
+<property name="working.dir" value="..\\"/>
+<property name="build.target" value="$(working.dir)/target"/>
+<property name="project. target" value="$(build target)/project"/>
+<property name="project.build.output" value="${project.target)/output"/>
+<property name="project.java.classes" value="$(project.build.output)/java-classes"/>
+<property name="project.java: source" value="..\\src">
+<property name="project.source.lib" value="..\\1ib"/>
+<property namen="compiler encoding" value="UTF-8"/>
+<property name="project.java manifest" value="..\\manifest\\MANIFEST.MF"/>
+
+<target name="cleanup">
+	<delete dir="${build.target}"/>
+</target>
+
+<target name="prepareTarget" depends="cleanup"> cekdir dir="s(build target)"/>
+	<mkdir dir="${project.target}"/>
+	<mkdir dir="${built.target}"/>
+	<mkdir dir="${project.build.output}"/>
+	<mkdir dir="${projet.java.classes}"/>
+	
+  </target>
+
+<target name="compilejava"depends="prepareTarget">
+	<pathid="build.project.classpath">
+		<filesetdir="${project.source.lib}"includes="**/*.jar">
+	</path>
+	
+	<javac
+		encoding="${compiler.encoding}"
+		
