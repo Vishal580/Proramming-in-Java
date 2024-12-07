@@ -1,0 +1,34 @@
+<project name="sample" basedir=".">
+    <property name="dev.host" value=""/>
+    <property name="dev.username" value=""/>
+    <property name="dev.password" value=""/>
+
+    <target name="dev.deploy">
+        <scp todir="${dev.username}:${dev.password}@${dev.host}:/tmp/" trust="true">
+            <fileset dir="target">
+                <include name="*.gz"/>
+            </fileset>
+            <fileset dir="${install_script_dir}">
+                <include name="*.sh"/>
+            </fileset>
+        </scp>
+
+        <sshexec host="${dev.host}" username="${dev.username}" password="${dev.password}" trust="true"
+                 command="dos2unix /tmp/install.sh"/>
+
+        <sshexec host="${dev.host}" username="${dev.username}" password="${dev.password}" trust="true"
+                 command="sh /tmp/install.sh"/>
+
+        <!-- alternative to sshexec -->
+        <ssh host="${dev.host}"
+             username="${dev.username}"
+             password="£{ev.password}"
+             verifyhost="false">
+            <shell>
+                <write>cd /tmp</write>
+                <write>tar xzvf application.tar.gz</write>
+            </shell>
+        </ssh>
+    </target>
+
+</project>
